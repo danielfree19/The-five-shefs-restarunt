@@ -1,0 +1,9 @@
+<div class="container">
+    <input (keyup)="onKey($event)">
+    <div class="row">
+        <div *ngFor="let editor of editorsInfo$|async" style="text-align: center; margin-top: 20px;" class="col">
+            <img src = "../../assets/editor img/{{editor.ID}}.jpg" style="height: 300px;width:325px; display: inline-block;">
+            <p *ngIf="correct">{{editor.ID + " " +editor.name}}</p>
+        </div>
+    </div>
+</div>

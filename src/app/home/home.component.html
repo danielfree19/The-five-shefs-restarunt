@@ -1,0 +1,38 @@
+<!-- -->
+<style>
+   /* div{
+        border-style: solid;
+    }*/
+    .col-2 .btn{
+        height: 100%;
+    }
+</style>
+<div >
+    <h1 align="center">ברוכים הבאים למסעדת של חמשת השפים</h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-2 text-center ">
+            <button (click)='nextPic()' class="btn btn-primary">
+                <<
+            </button>
+        </div>
+        <div class="col-8 text-center align-middle">
+            <img src='{{imgURL}}' style="height: 354px;width: 100%;">
+        </div>
+        <div class="col-2 text-center" >
+            <button (click)='prevPic()' class="btn btn-primary">
+                >>
+            </button>
+        </div>
+
+    </div>
+    <a routerLink='/profile'>profile</a>
+    <div id="content" style="margin-top:100px;" class="text-center">
+        <h1>
+         "Food is the ingredient that binds us together
+         "</h1>
+     </div>
+
+</div>

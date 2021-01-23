@@ -1,0 +1,11 @@
+<div class="row" style="margin-top:20px;">
+    <div class="col-6 single-menu" style="padding: 5px;" *ngFor="let food of menuItems$|async">
+    <img src="../../assets/img/Menu/{{food.pic}}.jpg" class="pic_size" alt="">
+        <div class="menu-content ">
+            <h4> {{food.name}}
+            <span> {{food.price}}</span></h4>
+            <p>{{food.desc}} </p>
+            <button class="btn btn-primary" style="margin-top: 10px;" (click)="addToCart(food.pic,food.name,food.price)">הוסף לסל</button>
+        </div>
+    </div>
+</div>

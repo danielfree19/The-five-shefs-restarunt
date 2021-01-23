@@ -1,0 +1,76 @@
+<!--
+
+-->
+<style>
+    .btn{
+        margin-left: 20px;
+    }
+    .col-6{
+        margin-top: 15px;
+    }
+    .borderbox{
+        border-style:groove;
+    }
+    .inWid{
+        margin-bottom: 15px;
+        width: 200px;
+    }
+</style>
+<div class="content">
+    <div class="row">
+        <div class="col-2"*ngFor="let item of cart.cart">
+            <div class="card border-light mb-3"  style="max-width: 16rem; max-height: fit-content;" >
+                <div class="card-header">{{item.nameGet()}}</div>
+                <div class="card-body">
+                <h5 class="card-title">{{"מחיר "+item.priceGet()}}</h5>
+                <p class="card-text"><button class="btn-primary" style="margin-left: 10px;" (click)="cart.DecAmount(item)">-</button>{{"כמות "+item.getAmount()}}<button class="btn-primary" style="margin-right:10px;" (click)="cart.AddAmount(item)">+</button></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-12" style="text-align: center;">
+    <div class="card border-light mb-3"  style="max-width: 10rem; display: inline-block; max-height: fit-content;">
+        <div class="card-header">מחיר כולל </div>
+        <div class="card-body">
+        <h5 class="card-title" >&#8362;{{cart.getTotalPrice()}}</h5>
+        <p class="card-text"></p>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="row" style="text-align: center;">
+        <div class="col-8" >
+            <p>תודה שבחרת לבצע את ההזמנה דרכינו בתשלום באשראי נא למלא את הפרטים למזומן נא ללחוץ על השלם הזמנה או אתם יכולים לשלם חלק באשראי והשאר ישולם במזומן</p>
+        </div>
+
+
+        <div class="col-6 borderbox" style="text-align: center;">
+            <table style="display: inline-block;">
+                <tr>
+                    <td>
+                        <p>תבחר בבקשה מחיר כולל באשראי </p><input class="inWid" [value]="cart.getTotalPrice()-totalInCreditCard()" #CreditTotal placeholder="מחיר באשראי" >
+                        <div><input class="inWid" #credNum placeholder="מספר אשראי"></div>
+                        <div><input class="inWid" type="month" min={{date}}  #ExpDate placeholder="תוקף">
+
+                        </div>
+                        <div><input class="inWid" #digits placeholder="שלוש ספרות בגב הכרטיס"></div>
+                        <div><input class="inWid" #ID placeholder="ת.ז"></div>
+                        <div></div>
+                    </td>
+                    <td>
+                        <div *ngFor="let card of creditInfo">
+                            {{card.getCnum() + " "+card.getPrice()}}
+                            <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Delete" (click)="remFunc()"><fa-icon [icon]="['far', 'trash-alt']"></fa-icon></button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <button (click)="insertCreditIn(CreditTotal.value,credNum.value,ExpDate.value,digits.value,ID.value)">הוסף</button>
+        </div>
+        <div class="col-6">
+            <button (click)="completeTransaction()">השלם הזמנה</button>
+        </div>
+    </div>
+</div>
+

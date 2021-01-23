@@ -1,0 +1,66 @@
+<style>
+    input{
+       margin-bottom: 10px;
+    }
+   button{
+      margin-left: 5px;
+   }
+</style>
+<!-- logged in message -->
+ <div class="row" *ngIf="authService.isConnected() else elseBlock">
+      <div class="col">
+       <p>שלום, {{authService.user.displayName}}</p>
+      </div>
+      <div class="col">
+         <button class="dropbtn" style="border-radius: 20px; background-color: cornflowerblue; color: aqua;" (click)="authService.disconnect()">התנתק</button>
+      </div>
+      <div class="col" style="display: none;">
+         <button class="dropbtn" style="border-radius: 20px; background-color: cornflowerblue; color: aqua;" >דף פרופיל</button>
+      </div>
+ </div>
+<!-- logged in message end -->
+<ng-template #elseBlock>
+   <!--log in-->
+  <div class="dropdown" style="margin-left:50px ;">
+      <button class="dropbtn" style="border-radius: 20px; background-color: cornflowerblue; color: aqua;">משתמש</button>
+      <div class="dropdown-content" >
+        <div *ngIf="flag else elseBlock2">
+         <span style="text-align: center;">
+         <input type="text" #usrlog placeholder="Email">
+         <input type="password" #pwdlog placeholder="Password">
+         <div>
+            <button class="btn btn-primary" (click)="login(usrlog.value,pwdlog.value)">התחברות</button>
+            <button class="btn btn-primary" (click)="flagToggle()">רישום</button>
+         </div>
+        </span>
+
+        <span style="text-align: center;" >
+         <button class="dropbtn" style="border-radius: 20px; background-color: cornflowerblue; color: aqua;" (click)="Glogin()"><fa-icon [icon]="['fab', 'google']"></fa-icon></button>
+        </span>
+
+      </div>
+      <!-- log in end-->
+      <!-- sign up -->
+      <ng-template #elseBlock2>
+         <span>
+          <input type="text" #Username placeholder="Display name">
+          <input type="text" #Email placeholder="Email">
+          <input type="password" #Pwd placeholder="Password">
+          <input type="password" #RePwd placeholder="rePassword">
+
+            <div>
+               <button class="btn btn-primary" (click)="flagToggle()">התחברות</button>
+               <button class="btn btn-primary" (click)="register(Username.value,Email.value,Pwd.value,RePwd.value)">רישום</button>
+            </div>
+         </span>
+      </ng-template>
+
+      <div dir="ltr">
+         <p  style="color: black;">{{authService.getErrorMsg()}}</p>
+      </div>
+      </div>
+
+   </div>
+   <!--sign up end-->
+</ng-template>
+
