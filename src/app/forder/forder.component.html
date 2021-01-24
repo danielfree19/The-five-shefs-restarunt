@@ -15,11 +15,17 @@
         margin-bottom: 15px;
         width: 200px;
     }
+    div.space{
+      margin-bottom: 200px;
+    }
 </style>
+<div class="space">
+
+
 <div class="content">
     <div class="row">
-        <div class="col-2"*ngFor="let item of cart.cart">
-            <div class="card border-light mb-3"  style="max-width: 16rem; max-height: fit-content;" >
+        <div class="col-3"*ngFor="let item of cart.cart" style=" padding-left: 0;">
+            <div class="card border-light mb-3"  style="max-width: 16rem;" >
                 <div class="card-header">{{item.nameGet()}}</div>
                 <div class="card-body">
                 <h5 class="card-title">{{"מחיר "+item.priceGet()}}</h5>
@@ -74,3 +80,4 @@
     </div>
 </div>
 
+</div>

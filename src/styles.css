@@ -37,13 +37,13 @@
     }
 }
 body {
-    
-    
+
+
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    
+
     background-repeat:no-repeat;
     background: -webkit-linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
     background: -moz-linear-gradient( 120deg, #a1c4fd 0%, #c2e9fb 100%);
@@ -59,7 +59,7 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-   
+
 }*/
 
 .todo-done {

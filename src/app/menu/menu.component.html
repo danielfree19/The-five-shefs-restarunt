@@ -5,9 +5,10 @@
         <img src="../../assets/img/png/logo1.png" class="img-size" style="border-radius: 20px;" routerLink="home">
         &nbsp;&nbsp;&nbsp;
         <div class="navbar-nav">
-            <a class="nav-item nav-link text" routerLink="home">בית</a>
-            <a class="nav-item nav-link text" routerLink="">תפריט</a>
-            <a class="nav-item nav-link text" routerLink="about-us">עלינו בקצרה</a>
+            <a class="nav-item nav-link text" routerLink="/home">בית</a>
+            <a class="nav-item nav-link text" routerLink="/FoodMenu">תפריט</a>
+            <a class="nav-item nav-link text" routerLink="/about-us">עלינו בקצרה</a>
+            <a *ngIf="authService.isConnected()" class="nav-item nav-link text" routerLink="/profile">פרופיל</a>
         </div>
     </div>
     <!--Navigation Strip Items end-->
@@ -41,7 +42,7 @@
                         <button style="margin-top: 10px;width:120px;" class="btn btn-primary" (click)="remCookie()">איפוס עגלה</button>
                     </span>
                     <ng-template #elseBlock>
-                        <h6 style="text-align: center; color: black;">לא בחרת שום מוצר תכנס ל<a routerLink="/">תפריט</a> כדי לבחור מוצרים כדי להכניס לעגלה</h6>
+                        <h6 style="text-align: center; color: black;">לא בחרת שום מוצר תכנס ל<a routerLink="/FoodMenu">תפריט</a> כדי לבחור מוצרים כדי להכניס לעגלה</h6>
                     </ng-template>
                 </div>
             </div>

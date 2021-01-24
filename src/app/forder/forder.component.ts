@@ -7,6 +7,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { getLocaleDateTimeFormat } from '@angular/common';
 import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import {  FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -54,17 +55,23 @@ export class ForderComponent implements OnInit {
    this.credit = !this.credit;
  }
 
-  constructor(public authService: AuthService,private library: FaIconLibrary,public CRUDService:CRUDService,public db:AngularFireDatabase) {
+  constructor(
+    public authService: AuthService,
+    private library: FaIconLibrary,
+    public CRUDService:CRUDService,
+    public db:AngularFireDatabase,
+    public router:Router) {
     this.cart = CartOI;
     library.addIcons(
       faTrashAlt
     );
 
   }
-
-   completeTransaction(){
+  reID = (this.a.getMonth() + 1) + "54535" + this.a.getMilliseconds();
+  completeTransaction(){
    if(this.authService.isConnected()){
-    this.CRUDService.Addrecipt(CartOI,CartOI.totalPrice()-this.totalInCreditCard(),this.creditInfo)// cart
+    this.CRUDService.Addrecipt(CartOI,this.reID,CartOI.totalPrice()-this.totalInCreditCard(),this.creditInfo)// cart
+    this.router.navigate(["/recipt/"+this.reID])
    }
    else{
      console.log("Connect as a registered user first");

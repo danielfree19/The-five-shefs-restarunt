@@ -22,7 +22,7 @@ const routes: Routes = [
     path: 'FoodMenu', component: FoodMenuComponent
   },
   {
-    path: 'recipt', component: ReciptComponent
+    path: 'recipt/:id', component: ReciptComponent
   },
   {
     path: 'about-us', component: AboutUsComponent

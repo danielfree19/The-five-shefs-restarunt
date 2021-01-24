@@ -5,6 +5,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { cart } from '../services/cart.service';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-profile',
@@ -12,22 +13,20 @@ import { Router } from '@angular/router';
     styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-    Cart;
-    recipt;
-    displayName ;
-    date = new Date();
+     displayName;
+    disName;
     email;
     birthDay;
     address;
     phoneNum;
-    recipts;
-    reciptsIDs;
+    profile;
+    reciptsIDs
+    date = new Date();
     flag=false;
+
     constructor(public af: AngularFireAuth,public crud:CRUDService,public db:AngularFireDatabase,public auth:AuthService,public router:Router) {
-        let temp = '';
-        this.displayName = af.user.forEach((user) => {
-            temp += JSON.stringify(user) + '\n';
-        })
+
+        console.log(this.profile+" const")
 
     }
     onKey(event: any) { // without type info
@@ -36,17 +35,11 @@ export class ProfileComponent implements OnInit {
         let key = 'address';
         console.log(string);
         this.crud.updateProfile(key,string);
-      }
+        console.log(this.profile +"  fun")
+        console.log(this.profile[0])
     }
-    showRecipt(recID){
-      this.db.list('/users/' + JSON.parse(sessionStorage.getItem('user')).uid).valueChanges().subscribe(reciptinfo=>{
-        this.recipt=reciptinfo[1][recID];
+  }
 
-        console.log(this.recipt)
-        console.log(this.Cart)
-      });
-
-    }
 
     ngOnInit(): void {
       if(!this.auth.isConnected()){
@@ -57,6 +50,18 @@ export class ProfileComponent implements OnInit {
         this.email = user.email;
       });
       this.reciptsIDs=this.db.list('/users/' + JSON.parse(sessionStorage.getItem('user')).uid + '/recipts').snapshotChanges();
+      console.log(this.profile +"  init")
+      let id =JSON.parse(sessionStorage.getItem('user')).uid;
+      this.db.list('/users/' +id+ '/profile/').valueChanges().subscribe(details => {
+        this.birthDay = String(details[1]);
+        this.address = String(details[0]);
+        this.phoneNum = String(details[4]);
+        this.profile.push(this.phoneNum);
+        this.profile.push(this.address);
+        this.profile.push(this.birthDay);
+        this.profile.push(this.email);
+        this.profile.push(this.displayName);
+    });
     }
 
-}
+  }

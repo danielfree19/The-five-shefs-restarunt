@@ -1,25 +1,34 @@
 import { Injectable, OnInit } from '@angular/core';
 
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
+import { Observable } from 'rxjs';
 
 
 
 @Injectable({
     providedIn: 'root'
 })
+
 export class CRUDService implements OnInit {
+    displayName;
+    email;
+    birthDay;
+    address;
+    phoneNum;
     user: any;
     users: any;
     reciptDB: any;
     reciptlist:any []=[] ;
+    profile:any[]=[];
+    profilePath;
     constructor(private db: AngularFireDatabase) {
 
     }
 
     // Create Student
-    Addrecipt(cartItems, cash?, CreditCard?) {
+    Addrecipt(cartItems,id, cash?, CreditCard?) {
         let date = new Date()
-        this.reciptDB = this.db.object('/users/' + JSON.parse(sessionStorage.getItem('user')).uid + '/recipts/' + (date.getMonth() + 1) + "54535" + date.getMilliseconds());
+        this.reciptDB = this.db.object('/users/' + JSON.parse(sessionStorage.getItem('user')).uid + '/recipts/' + id);
         this.reciptDB.set({
             thisdate: date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear(),
             cartItems: cartItems,
@@ -60,20 +69,12 @@ export class CRUDService implements OnInit {
         phoneNum:phoneNum,});
       }
 
-    updateProfile( key,data){
+    updateProfile(key,data){
       let id =JSON.parse(sessionStorage.getItem('user')).uid;
       this.user = this.db.object('/users/' +id+'/profile/');
       this.user.update({[key]:data});
       }
     //Fetch user profile
-    GetProfile(){
-      let profile:any[]=[];
-      return this.user.valueChanges().subscribe(object=>{
-        profile.push(object) ;
-      });
-      return profile
-    }
-
     /*
      // Update Student Object
      UpdateStudent(student: Student) {

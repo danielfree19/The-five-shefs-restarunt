@@ -81,3 +81,7 @@ body{
   color:#ff7720;
   font-style:italic;
 }
+
+div.row{
+  margin-bottom: 200px;
+}

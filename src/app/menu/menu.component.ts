@@ -1,8 +1,8 @@
-import firebase from 'firebase/app';
+
 import { AuthService } from '../services/auth.service';
 import { CartOI } from './../app.component';
 import { Component, OnInit } from '@angular/core';
-import * as firebaseui from 'firebaseui';
+
 
 
 @Component({

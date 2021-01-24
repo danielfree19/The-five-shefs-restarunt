@@ -1,4 +1,23 @@
 
+<input (keyup)="onKey($event)" #name>
+<input>
+
+<div class="card" style="width: 35rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{displayName}}</h5><input #DisplayName>
+    <p class="card-text">{{email}}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{phoneNum}}</li><input #PhoneNum>
+    <li class="list-group-item">{{address}}</li><input #Address>
+    <li class="list-group-item">{{birthDay}}</li><input #BirthDay>
+  </ul>
+  <div class="card-body">
+    <a href="#" class="card-link">Edit</a>
+    <a href="#" class="card-link">View recipts</a>
+  </div>
+</div>
+
 <div class="container" style="text-align:center;" *ngIf="flag else Else">
     <input (keyup)="onKey($event)">
     <style>
@@ -20,6 +39,7 @@
     <div class="col-6">
 
     </div>
+    <!--TODO: Routing to the recipt -->
 
     <div class="col-6">
       טלפון: 04-9910840
@@ -66,8 +86,8 @@
 <ng-template #Else>
   <div class="row">
     <div class="col-4" *ngFor="let ID of reciptsIDs|async">
-      {{ID.key}}
-      <button class="btn btn-primary" (click)="showRecipt(ID.key)">show</button>
+      {{ID.key}}<!---->
+      <button class="btn btn-primary" routerLink="/recipt/{{ID.key}}">show</button>
     </div>
   </div>
 </ng-template>
