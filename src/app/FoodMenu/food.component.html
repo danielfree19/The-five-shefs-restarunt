@@ -1,5 +1,5 @@
 <div class="row" style="margin-top:20px;">
-    <div class="col-6 single-menu" style="padding: 5px;" *ngFor="let food of menuItems$|async">
+    <div class="col-6 single-menu" style="padding: 5px;" *ngFor="let food of menuItems$">
     <img src="../../assets/img/Menu/{{food.pic}}.jpg" class="pic_size" alt="">
         <div class="menu-content ">
             <h4> {{food.name}}

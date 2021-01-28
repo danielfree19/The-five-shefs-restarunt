@@ -7,53 +7,8 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-recipt',
-
   styleUrls:["./recipt.component.css"],
-  template:`
-  <div class="content" style="text-align:center;">
-  <div>
-  <div>
-      {{date}}
-  </div>
-  <div>
-       מסעדת חמשת השפים
-  </div>
-  <div>
-    כתובת: יוחנן הסנדלר 10 חיפה<br>
-    טלפון: 04-9910840
-    </div>
-      <h1>{{" קבלה מס "+reciptnum}}</h1><!--recipt id in prog-->
-      {{"לכבוד, "+username}}
-      <h4>
-        {{"מחיר כולל: " + totalPrice}}
-  </h4>
-    </div>
-    <div style="display:inline-block;">
-  <div class="row" >
-    <div *ngFor="let item of Items" class="card border-light mb-3 col-4" style="max-width: 18rem;margin-left:5px;max-height: fit-content;min-width:200px;">
-      <div class="card-header" >
-      <img src="../../assets/img/Menu/{{item.pic}}.jpg" class="pic_size" alt="">
-      </div>
-      <div class="card-body">
-        <h5 class="card-title">{{item.name }}</h5>
-        <p class="card-text">
-          {{"מחיר ליחידה: "+ item.price}}
-          {{"כמות: " +  item.amount}}
-        </p>
-      </div>
-    </div>
-  </div>
-  </div>
-
-  </div>
-
-
-
-
-
-
-
-  `
+  templateUrl:'./recipt.component.html'
 })
 export class ReciptComponent implements OnInit,OnDestroy {
   username;
@@ -62,21 +17,29 @@ export class ReciptComponent implements OnInit,OnDestroy {
   date;
   recipt;
   Items;
-  reciptnum = this.param.snapshot.paramMap.get('id');
+  reciptnum;
+  sub;
   constructor(public authService:AuthService,public db:AngularFireDatabase,public param:ActivatedRoute){
+    this.sub = this.param.params.subscribe(value=>{
+      this.reciptnum = value.id;
+      this.oninit()
+    })
   }
   cart = CartOI;
   ngOnInit(): void {
+
+  }
+  oninit(){
     this.db.list('/users/' + JSON.parse(sessionStorage.getItem('user')).uid).valueChanges().subscribe(info=>{
       this.recipt = info[1][this.reciptnum];
       this.date = this.recipt.thisdate;
-      this.username = info[0]['displayname']
+      this.username = this.authService.user.displayName;
       this.cartInfo = this.recipt['cartItems'];
       this.Items = this.cartInfo.cart;
       this.totalPrice = this.cartInfo.totalcost;
     })
   }
   ngOnDestroy(){
-
+    this.sub.unsubscribe();
   }
 }

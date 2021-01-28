@@ -71,6 +71,7 @@ export class ForderComponent implements OnInit {
   completeTransaction(){
    if(this.authService.isConnected()){
     this.CRUDService.Addrecipt(CartOI,this.reID,CartOI.totalPrice()-this.totalInCreditCard(),this.creditInfo)// cart
+    this.remCookie();
     this.router.navigate(["/recipt/"+this.reID])
    }
    else{
@@ -81,6 +82,10 @@ export class ForderComponent implements OnInit {
   }
   remFunc(item){
     this.creditInfo.splice(this.creditInfo.indexOf(item),1);
+  }
+  remCookie() {
+    sessionStorage.removeItem('cart');
+    this.cart.cart.splice(0);
   }
 }
 class creditCard{

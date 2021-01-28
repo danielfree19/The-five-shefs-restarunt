@@ -1,93 +1,67 @@
-
-<input (keyup)="onKey($event)" #name>
-<input>
-
-<div class="card" style="width: 35rem;">
-  <div class="card-body">
-    <h5 class="card-title">{{displayName}}</h5><input #DisplayName>
-    <p class="card-text">{{email}}</p>
+<div class="row" style="margin-top:10px;">
+  <!--
+    <div class="col-6">
+    <div class="card" style="width: 35rem;">
+      <div class="card-body">
+        <h5 class="card-title">Your name:</h5><input id='DisplayName' value="{{displayName}}"disabled>
+        <div><label>  email</label><p class="card-text">{{email}}</p></div>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">phone number</li><input id='PhoneNum' value="{{phoneNum}}" disabled>
+        <li class="list-group-item">Address</li><input id='Address' value="{{address}}"disabled>
+        <li class="list-group-item">date of birth</li><input id='BirthDay' value="{{birthDay}}"disabled>
+      </ul>
+      <div class="card-body">
+        <button id='EditBtn' (click)="EditProfile()" class="btn" [ngClass]="EditBtnText =='Edit' ? 'btn-primary': 'btn-success'" style="margin-left:10px ;">{{EditBtnText}}</button>
+        <button class="card-link btn btn-primary" (click)="ReciptViewFlagToggle()">View recipts</button>
+      </div>
+    </div>
   </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{phoneNum}}</li><input #PhoneNum>
-    <li class="list-group-item">{{address}}</li><input #Address>
-    <li class="list-group-item">{{birthDay}}</li><input #BirthDay>
-  </ul>
-  <div class="card-body">
-    <a href="#" class="card-link">Edit</a>
-    <a href="#" class="card-link">View recipts</a>
+-->
+  <div class="col-6" style="text-align: center;">
+    <table style=" display: inline-block;">
+      <tr>
+        <td>שם פרטי: </td>
+        <td><input id='DisplayName' value="{{displayName}}"disabled></td>
+      </tr>
+      <tr>
+        <td>אימייל: </td>
+        <td>{{email}}</td>
+      </tr>
+      <tr>
+        <td> מספר טלפון:</td>
+        <td><input id='PhoneNum' value="{{phoneNum}}" disabled></td>
+      </tr>
+      <tr>
+        <td>כתובת:</td>
+        <td><input id='Address' value="{{address}}"disabled></td>
+      </tr>
+      <tr>
+        <td>תאריך לידה:</td>
+        <td><input id='BirthDay' value="{{birthDay}}"disabled></td>
+      </tr>
+      <tr>
+        <td><button id='EditBtn' (click)="EditProfile()" class="btn" style="display: inline-block;margin-left:10px ;" [ngClass]="EditBtnText =='Edit' ? 'btn-primary': 'btn-success'" >{{EditBtnText}}</button></td>
+        <td> <button class="card-link btn btn-primary"  (click)="ReciptViewFlagToggle()" style="display: inline-block;">View recipts</button></td>
+      </tr>
+    </table>
   </div>
-</div>
-
-<div class="container" style="text-align:center;" *ngIf="flag else Else">
-    <input (keyup)="onKey($event)">
-    <style>
-      td{
-        padding:5px;
-        margin-left:2px;
-      }
-    </style>
-  <div class="row">
-    <div class="col-6">
-      מסעדת חמשת השפים
+  <div class="col-6" *ngIf='ReciptViewFlag'>
+    <div class="row">
+      <div class="col-12" style="text-align: center;"><h1>Recipts</h1></div>
+      <div class="col-4" *ngFor="let ID of reciptsIDs|async">
+        <div>
+          {{ID.key}}
+        </div>
+        <div>
+          <button class="btn btn-primary" routerLink="./recipt/{{ID.key}}">
+            show
+          </button>
+        </div>
+      </div>
     </div>
-    <div class="col-6">
-      {{date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear()}}
-    </div>
-    <div class="col-6">
-      כתובת: יוחנן הסנדלר 10 חיפה
-    </div>
-    <div class="col-6">
-
-    </div>
-    <!--TODO: Routing to the recipt -->
-
-    <div class="col-6">
-      טלפון: 04-9910840
-    </div>
-
-    <div class="col-6">
-
-    </div>
-
-    <div class="col-12">
-      <h1>קבלה</h1><!--recipt id in prog-->
-    </div>
-
-    <div class="col-6">
-      {{"לכבוד, "+displayName}}
-    </div>
-    <div class="col-12">
-      <table style="display:inline-block;">
-
-        <!--  <tr *ngFor="let item of cart.cart">
-          <td>  {{item.nameGet() }}</td>
-          <td>{{"מחיר ליחידה: "+ item.priceGet()}}</td>
-
-          <td>{{"כמות: " +  item.getAmount()}}</td>
-        </tr>-->
-      </table>
-    </div>
-
-    <div class="col-4">
-
-    </div>
-
-    <div class="col-4">
-      <h4>
-        {{"מחיר כולל: "}}
-      </h4>
-    </div>
-
-    <div class="col-4">
-
-    </div>
+  </div>
+  <div class="col-12" style="margin-top: 20px;">
+    <router-outlet></router-outlet>
   </div>
 </div>
-<ng-template #Else>
-  <div class="row">
-    <div class="col-4" *ngFor="let ID of reciptsIDs|async">
-      {{ID.key}}<!---->
-      <button class="btn btn-primary" routerLink="/recipt/{{ID.key}}">show</button>
-    </div>
-  </div>
-</ng-template>

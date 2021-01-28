@@ -6,42 +6,63 @@ import { cart } from '../services/cart.service';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-
 @Component({
     selector: 'app-profile',
     templateUrl: './profile.component.html',
     styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-     displayName;
+    displayName;
     disName;
     email;
     birthDay;
     address;
     phoneNum;
     profile;
-    reciptsIDs
+    reciptsIDs;
     date = new Date();
     flag=false;
-
+    EditBtnText= 'Edit';
+    ReciptViewFlag=false;
+    ReciptViewFlagToggle(){
+      this.ReciptViewFlag = !this.ReciptViewFlag;
+    }
     constructor(public af: AngularFireAuth,public crud:CRUDService,public db:AngularFireDatabase,public auth:AuthService,public router:Router) {
 
         console.log(this.profile+" const")
 
     }
-    onKey(event: any) { // without type info
-      if(event.key === "Enter"){
-        let string = event.target.value.toString();
-        let key = 'address';
-        console.log(string);
-        this.crud.updateProfile(key,string);
-        console.log(this.profile +"  fun")
-        console.log(this.profile[0])
+
+  EditProfile(){
+    if(this.EditBtnText == 'Edit'){
+    let nameInput = document.getElementById("DisplayName") as HTMLInputElement
+    nameInput.disabled=false;
+    let phoneInput = document.getElementById("PhoneNum") as HTMLInputElement
+    phoneInput.disabled=false;
+    let addressInput = document.getElementById("Address") as HTMLInputElement
+    addressInput.disabled=false;
+    let birthDayInput = document.getElementById("BirthDay") as HTMLInputElement
+    birthDayInput.disabled=false;
+    this.EditBtnText = 'Submit';
+    }else{
+      this.EditBtnText = 'Edit';
+      let nameInput = document.getElementById("DisplayName") as HTMLInputElement
+      nameInput.disabled=true;
+      let phoneInput = document.getElementById("PhoneNum") as HTMLInputElement
+      phoneInput.disabled=true;
+      let addressInput = document.getElementById("Address") as HTMLInputElement
+      addressInput.disabled=true;
+      let birthDayInput = document.getElementById("BirthDay") as HTMLInputElement
+      birthDayInput.disabled=true;
+      this.crud.updateProfile('displayName',nameInput.value);
+      this.crud.updateProfile('phoneNum',phoneInput.value);
+      this.crud.updateProfile('address',addressInput.value);
+      this.crud.updateProfile('birthDay',birthDayInput.value);
     }
   }
 
 
-    ngOnInit(): void {
+    async ngOnInit(): Promise<void> {
       if(!this.auth.isConnected()){
         this.router.navigate(['/home']);
       }
@@ -56,11 +77,6 @@ export class ProfileComponent implements OnInit {
         this.birthDay = String(details[1]);
         this.address = String(details[0]);
         this.phoneNum = String(details[4]);
-        this.profile.push(this.phoneNum);
-        this.profile.push(this.address);
-        this.profile.push(this.birthDay);
-        this.profile.push(this.email);
-        this.profile.push(this.displayName);
     });
     }
 

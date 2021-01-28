@@ -1,7 +1,7 @@
 
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 
-import { cart, items } from './services/cart.service';
+import { cart } from './services/cart.service';
 export const CartOI:cart=new cart();
 
 @Component({
@@ -10,7 +10,7 @@ export const CartOI:cart=new cart();
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent  {
+export class AppComponent{
   menuItems$;
 
 

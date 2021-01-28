@@ -16,11 +16,8 @@ export class AboutUsComponent implements OnInit {
   }
 
   values = '';
-  onKey(event: any) { // without type info
-    if(event.key === "Enter"){
-      this.pass = event.target.value;
+  onKey() { // without type info
       this.correct = this.pass == this.setPass;
-    }
   }
 
   pass;

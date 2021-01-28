@@ -11,6 +11,7 @@ import { FoodMenuComponent } from './FoodMenu/FoodMenu.component';
 import { ProfileComponent } from './profile/profile.component';
 
 
+
 const routes: Routes = [
   {
     path: 'menu', component: MenuComponent
@@ -22,20 +23,23 @@ const routes: Routes = [
     path: 'FoodMenu', component: FoodMenuComponent
   },
   {
-    path: 'recipt/:id', component: ReciptComponent
-  },
-  {
     path: 'about-us', component: AboutUsComponent
   },
   {
     path: 'orderup', component: ForderComponent
   },
   {
-    path: 'profile', component: ProfileComponent
+    path: 'profile', component: ProfileComponent,
+    children:[
+      {
+        path: 'recipt/:id', component: ReciptComponent
+      }
+    ]
   },
 
+
   {
-    path: '**', component: HomeComponent
+    path: '**', redirectTo:'home'
   }
 ];
 

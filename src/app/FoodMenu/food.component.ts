@@ -12,7 +12,9 @@ export class FoodComponent implements OnInit {
 
     menuItems$:any;
     constructor(db:AngularFireDatabase,public Cart:cart){
-        this.menuItems$ = db.list('/menu').valueChanges();
+         db.list('/menu').valueChanges().subscribe(menuItems=>{
+           this.menuItems$ = menuItems;
+         });
     }
     addToCart(pic,name,price){
       CartOI.addItem(pic,name,price);

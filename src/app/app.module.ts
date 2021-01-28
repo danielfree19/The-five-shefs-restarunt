@@ -1,8 +1,7 @@
 import { ReciptComponent } from './recipt/recipt.component';
-import { cart } from './services/cart.service';
 import { FoodComponent } from './FoodMenu/food.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {  NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
@@ -18,6 +17,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoginComponent } from './login/login.component';
 import { ForderComponent } from './forder/forder.component';
 import { ProfileComponent } from './profile/profile.component';
+import { FormsModule } from '@angular/forms';
+import { CartdropComponent } from './cartdrop/cartdrop.component';
 
 @NgModule({
   declarations: [
@@ -33,10 +34,11 @@ import { ProfileComponent } from './profile/profile.component';
     ForderComponent,
     ReciptComponent,
     ProfileComponent,
-
+    CartdropComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
@@ -46,5 +48,6 @@ import { ProfileComponent } from './profile/profile.component';
 
   ],
   bootstrap: [AppComponent]
+
 })
 export class AppModule { }

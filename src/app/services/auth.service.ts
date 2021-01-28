@@ -18,11 +18,9 @@ export class AuthService {
     constructor(
         public afAuth: AngularFireAuth, // Inject Firebase auth service
         public db: AngularFireDatabase,
-        public crud:CRUDService
-        ,public router:Router
-    ) {
-
-    }
+        public crud:CRUDService,
+        public router:Router
+    ) {}
     connected: Boolean = false;
 
 
@@ -64,15 +62,38 @@ export class AuthService {
 
 
     //******************************google auth**************************************
+    /*ceateProfile(email,displayName?,birthDay?,address?,phoneNum?){
+      let id =JSON.parse(sessionStorage.getItem('user')).uid;
+      this.user = this.db.object('/users/' +id+ '/profile/');
+      if(!displayName){
+        displayName = ''
+      };
+      if(!birthDay){
+        birthDay = ''
+      };
+      if(!address){
+        address = ''
+      };
+      if(!phoneNum){
+        phoneNum = ''
+      };
+      this.user.set({
+        email:email,
+        displayName:displayName,
+        birthDay:birthDay,
+        address:address,
+        phoneNum:phoneNum,});
+      }
+*/
     GoogleAuth() {
         return this.AuthLogin(new firebase.auth.GoogleAuthProvider());
     }
     AuthLogin(provider) {
         this.afAuth.signInWithPopup(provider).then((result) => {
             this.setUser(result["user"], result["user"].displayName);
-            this.db.object('/users/' + result['user'].uid + '/profile').set({
-                displayname: result['user'].displayName
-            });
+            if (result.additionalUserInfo.isNewUser)
+                this.crud.ceateProfile(result.user.email, result["user"].displayName);
+
         }).catch((error) => {
             this.errorMsg = error;
         })

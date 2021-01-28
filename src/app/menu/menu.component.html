@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand-lg navbar-light text-white">
     <a class="navbar-brand text-white" routerLink="/home"></a>
     <!--Navigation Strip Items-->
@@ -14,39 +15,46 @@
     <!--Navigation Strip Items end-->
     <div class="row">
         <!--login component-->
-        <div class="col-4">
+        <div class="col-6">
             <app-login></app-login>
         </div>
         <!--login component end-->
         <!--cart dropdown-->
-        <div class="col-5" style="text-align:left;">
-            <div class="dropdown" style="display: inline-block;">
-                <button class="dropbtn" style="border-radius: 20px; background-color: cornflowerblue; color: aqua;">עגלת קניות</button>
-                <div style="background-color: tomato;border-radius: 50%;   display:inline-block; padding: 10px; margin-right: -5px;">{{Cart.numOfItems()}}</div>
-                <div class="dropdown-content">
-                    <!--מציג את כל המוצרים בעגלה-->
-                    <span style="text-align: center;" *ngFor="let item of Cart.cart">
-                        <h6>{{item.nameGet()}}</h6>
-                        {{"מחיר "+item.priceGet()}}<br>
-                        <button class="btn-primary" (click)="Cart.DecAmount(item)">-</button>&nbsp;&nbsp;{{"כמות "+item.getAmount()}}&nbsp;&nbsp;<button class="btn-primary" (click)="Cart.AddAmount(item)">+</button><br>
-                        {{"מחיר כולל "+item.getTotal()}}<br>
-                        <button class="btn-primary" (click)="Cart.remFunc(item)">הסר</button>
-                    </span>
-                    <span style="text-align: center;" *ngIf="Cart.totalPrice()>0 else elseBlock">
-                        <!--מראה מחיר כולל של העגלה-->
-                        <h5>מחיר כולל</h5>
-                        <h4>&#8362;{{Cart.getTotalPrice()}}</h4>
-                        <!--כפתור שמשלים את הקניה-->
-                        <button style="width:120px;" class="btn btn-primary" [disabled]="!authService.isConnected()" routerLink="orderup">השלם הזמנה</button>
-                        <!--כפתור שמאפס את העגלה-->
-                        <button style="margin-top: 10px;width:120px;" class="btn btn-primary" (click)="remCookie()">איפוס עגלה</button>
-                    </span>
-                    <ng-template #elseBlock>
-                        <h6 style="text-align: center; color: black;">לא בחרת שום מוצר תכנס ל<a routerLink="/FoodMenu">תפריט</a> כדי לבחור מוצרים כדי להכניס לעגלה</h6>
-                    </ng-template>
-                </div>
-            </div>
+        <div class="col-6">
+              <app-cartdrop></app-cartdrop>
         </div>
         <!--cart dropdown end-->
     </div>
 </nav>
+
+<!--
+
+<div class="col-5" style="text-align:left;">
+            <div class="dropdown" style="display: inline-block;">
+                <button class="dropbtn" style="border-radius: 20px; background-color: cornflowerblue; color: aqua;">עגלת קניות</button>
+                <div style="background-color: tomato;border-radius: 50%;   display:inline-block; padding: 10px; margin-right: -5px;">{{Cart.numOfItems()}}</div>
+                <div class="dropdown-content">
+                    מציג את כל המוצרים בעגלה
+                    <span style="text-align: center;" *ngFor="let item of Cart.cart">
+                      <h6>{{item.nameGet()}}</h6>
+                      {{"מחיר "+item.priceGet()}}<br>
+                      <button class="btn-primary" (click)="Cart.DecAmount(item)">-</button>&nbsp;&nbsp;{{"כמות "+item.getAmount()}}&nbsp;&nbsp;<button class="btn-primary" (click)="Cart.AddAmount(item)">+</button><br>
+                      {{"מחיר כולל "+item.getTotal()}}<br>
+                      <button class="btn-primary" (click)="Cart.remFunc(item)">הסר</button>
+                  </span>
+                  <span style="text-align: center;" *ngIf="Cart.totalPrice()>0 else elseBlock">
+                      מראה מחיר כולל של העגלה
+                      <h5>מחיר כולל</h5>
+                      <h4>&#8362;{{Cart.getTotalPrice()}}</h4>
+                      כפתור שמשלים את הקניה
+                      <button style="width:120px;" class="btn btn-primary" [disabled]="!authService.isConnected()" routerLink="orderup">השלם הזמנה</button>
+                      כפתור שמאפס את העגלה
+                      <button style="margin-top: 10px;width:120px;" class="btn btn-primary" (click)="remCookie()">איפוס עגלה</button>
+                  </span>
+                  <ng-template #elseBlock>
+                      <h6 style="text-align: center; color: black;">לא בחרת שום מוצר תכנס ל<a routerLink="/FoodMenu">תפריט</a> כדי לבחור מוצרים כדי להכניס לעגלה</h6>
+                  </ng-template>
+              </div>
+          </div>
+      </div>
+-->

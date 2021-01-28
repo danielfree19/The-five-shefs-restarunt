@@ -19,20 +19,19 @@ export class cart{
         }
         this.info = [];
     }; // [{pic:number name price amount},{}]
-    flag:Boolean;
     totalcost:number=0;
-    result="";
     public cart:items[]=[]
     public addItem(pic,name,price,amount?){
-       if(!amount){
-        this.flag=true;
+      let flag:Boolean;
+      if(!amount){
+       flag=true;
             for(let item of this.cart){
              if(item.picGet() == pic){
                  item.addAmount();
-                 this.flag = false;
+                 flag = false;
              }
             }
-         if(this.flag){
+         if(flag){
             this.cart.push(new items(pic,name,price));
          }
        }
@@ -60,12 +59,13 @@ export class cart{
         return this.totalcost;
     }
     public toString(){
-      this.result="";
+      let result="";
+      result="";
       this.cart.forEach((value)=>{
-          this.result+=value.nameGet()+" "+value.priceGet()+" "+value.getAmount()+"\n";
+          result+=value.nameGet()+" "+value.priceGet()+" "+value.getAmount()+"\n";
       });
 
-      return this.result;
+      return result;
     }
     remFunc(item){
         this.cart.splice(this.cart.indexOf(item),1);
