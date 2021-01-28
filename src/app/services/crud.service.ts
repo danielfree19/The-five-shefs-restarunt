@@ -26,10 +26,11 @@ export class CRUDService implements OnInit {
     }
 
     // Create Student
-    Addrecipt(cartItems,id, cash?, CreditCard?) {
+    Addrecipt(cartItems,id, cash, CreditCard) {
         let date = new Date()
         this.reciptDB = this.db.object('/users/' + JSON.parse(sessionStorage.getItem('user')).uid + '/recipts/' + id);
         this.reciptDB.set({
+            //{key:value,key:value}
             thisdate: date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear(),
             cartItems: cartItems,
             payCash: cash,
@@ -66,7 +67,8 @@ export class CRUDService implements OnInit {
         displayName:displayName,
         birthDay:birthDay,
         address:address,
-        phoneNum:phoneNum,});
+        phoneNum:phoneNum,
+      });
       }
 
     updateProfile(key,data){

@@ -1,10 +1,10 @@
 
-  
+
   .dropdown {
     position: relative;
     display: inline-block;
   }
-  
+
   .dropdown-content {
     display: none;
     position: absolute;
@@ -13,21 +13,21 @@
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
   }
-  
+
   .dropdown-content span{
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
   }
-  
+
   .dropdown-content a:hover {background-color: #ddd;}
-  
+
   .dropdown:hover .dropdown-content {display: block;}
-  
+
   .dropdown:hover .dropbtn {background-color: #3e8e41;}
-  
-  
+
+
   .cartItems{
     border-radius: 20px;
     border-style: solid;
@@ -53,4 +53,13 @@
     width:100px;
     height: 80px;
   }
-  
+  @media (min-width: 481px) and (max-width: 1000px) {
+
+    .navbar-nav{
+        width: auto;
+    }
+    .col-6{
+      width: 100px;
+    }
+
+  }

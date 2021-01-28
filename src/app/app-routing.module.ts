@@ -2,7 +2,6 @@ import { ReciptComponent } from './recipt/recipt.component';
 import { ForderComponent } from './forder/forder.component';
 
 import { AboutUsComponent } from './about-us/about-us.component';
-import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -36,8 +35,6 @@ const routes: Routes = [
       }
     ]
   },
-
-
   {
     path: '**', redirectTo:'home'
   }

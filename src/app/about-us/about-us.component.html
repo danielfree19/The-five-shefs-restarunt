@@ -1,7 +1,8 @@
 <div class="container">
     <input [(ngModel)]="pass" (change)="onKey()" placeholder="Password" dir="ltr">
     <div class="row">
-        <div *ngFor="let editor of editorsInfo$|async" style="text-align: center; margin-top: 20px;" class="col">
+      <!-- for x in range(5) => 1 2 3 4 5 -->
+      <div *ngFor="let editor of editorsInfo$|async" style="text-align: center; margin-top: 20px;" class="col">
             <img src = "../../assets/editor img/{{editor.ID}}.jpg" style="height: 300px;width:325px; display: inline-block;">
             <p *ngIf="correct">{{editor.ID + " " +editor.name}}</p>
         </div>

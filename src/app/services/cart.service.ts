@@ -19,33 +19,36 @@ export class cart{
         }
         this.info = [];
     }; // [{pic:number name price amount},{}]
+
     totalcost:number=0;
+
     public cart:items[]=[]
+
     public addItem(pic,name,price,amount?){
       let flag:Boolean;
       if(!amount){
        flag=true;
-            for(let item of this.cart){
-             if(item.picGet() == pic){
-                 item.addAmount();
-                 flag = false;
-             }
-            }
-         if(flag){
-            this.cart.push(new items(pic,name,price));
-         }
-       }
-        else{
-            this.cart.push(new items(pic,name,price,amount));
+        for(let item of this.cart){
+          if(item.picGet() == pic){
+            item.addAmount();
+            flag = false;
+          }
         }
-
-        sessionStorage.setItem("cart",JSON.stringify(this.cart));
-
+        if(flag){
+          this.cart.push(new items(pic,name,price));
+        }
+      }
+      else{
+        this.cart.push(new items(pic,name,price,amount));
+      }
+      sessionStorage.setItem("cart",JSON.stringify(this.cart));
     }
+
     AddAmount(item){
         item.addAmount();
         sessionStorage.setItem("cart",JSON.stringify(this.cart));
     }
+
     DecAmount(item){
         item.decAmount();
         sessionStorage.setItem("cart",JSON.stringify(this.cart));
@@ -57,6 +60,13 @@ export class cart{
             this.totalcost += item.getTotal();
         }
         return this.totalcost;
+    }
+    getTotalPrice(){
+      let result=0;
+      this.cart.forEach((item)=>{
+          result+=item.getTotal();
+      });
+      return result;
     }
     public toString(){
       let result="";
@@ -70,7 +80,8 @@ export class cart{
     remFunc(item){
         this.cart.splice(this.cart.indexOf(item),1);
         sessionStorage.setItem("cart",JSON.stringify(this.cart));
-      }
+        // {key:value}
+    }
     numOfItems(){
           let i=0;
           this.cart.forEach((value)=>{
@@ -78,13 +89,7 @@ export class cart{
           })
           return i;
     }
-    getTotalPrice(){
-        let result=0;
-        this.cart.forEach((item)=>{
-            result+=item.getTotal();
-        });
-        return result;
-    }
+
 }
 export class items{
     constructor(private pic,private name,private price:number,private amount?:number){

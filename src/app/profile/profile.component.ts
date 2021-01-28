@@ -70,6 +70,7 @@ export class ProfileComponent implements OnInit {
         this.displayName = user.displayName;
         this.email = user.email;
       });
+      //{key:{key:value,key:value,key:value,key:value}}
       this.reciptsIDs=this.db.list('/users/' + JSON.parse(sessionStorage.getItem('user')).uid + '/recipts').snapshotChanges();
       console.log(this.profile +"  init")
       let id =JSON.parse(sessionStorage.getItem('user')).uid;
