@@ -26,7 +26,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.15.1",
     "@fortawesome/free-regular-svg-icons": "^5.15.1",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
-    "bootstrap": "^4.5.3",
+    "bootstrap": "^5.0.0",
     "firebase": "^8.1.2",
     "firebaseui": "^4.7.1",
     "git": "^0.1.5",
